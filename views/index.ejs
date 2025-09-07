@@ -1,0 +1,46 @@
+<div class="container">
+  <h1>Todo List</h1>
+
+  <head>
+  <meta charset="UTF-8">
+  <title>Todo List</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+
+  <form class="add-form" action="/add" method="post">
+    <input type="text" name="task" placeholder="Enter task">
+    <select name="priority">
+      <option>Low</option>
+      <option>Medium</option>
+      <option>High</option>
+    </select>
+    <button>Add</button>
+  </form>
+
+  <ul>
+    <% todos.forEach((t,i)=>{ %>
+      <li>
+        <div class="task-display">
+          [<%= t.priority %>] <%= t.task %>
+        </div>
+        <div class="edit-form">
+          <form action="/delete" method="post" style="display:inline;">
+            <input type="hidden" name="index" value="<%= i %>">
+            <button>Delete</button>
+          </form>
+          <form action="/edit" method="post" style="display:inline;">
+            <input type="hidden" name="index" value="<%= i %>">
+            <input type="text" name="task" value="<%= t.task %>">
+            <select name="priority">
+              <option>Low</option>
+              <option>Medium</option>
+              <option>High</option>
+            </select>
+            <button>Update</button>
+          </form>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+</div>
